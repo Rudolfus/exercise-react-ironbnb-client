@@ -1,5 +1,5 @@
 import "../App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -8,22 +8,30 @@ const ApartmentsList = ({
   setApartmentArrFromApi,
   devAPI,
 }) => {
+  const [apartArr, setApartArr] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    getApartmentArrFromApi();
+    getListOfApartments();
   }, []);
 
-  const getApartmentArrFromApi = () => {
+  const getListOfApartments = () => {
     axios
       .get(devAPI + "/apartments")
       .then((response) => {
         console.log(response.data);
 
-        setApartmentArrFromApi(response.data);
+        setApartArr(response.data);
+        setIsLoading(false);
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+  if (isLoading) {
+    return <div>isLoading</div>;
+  }
 
   return (
     <>
@@ -31,7 +39,7 @@ const ApartmentsList = ({
 
       {apartmentArrFromApi === null
         ? "loading apartments ..."
-        : apartmentArrFromApi.map((apartmentDetails) => {
+        : apartArr.map((apartmentDetails) => {
             return (
               <div key={apartmentDetails._id}>
                 <img src={apartmentDetails.img} alt="an apartment" />

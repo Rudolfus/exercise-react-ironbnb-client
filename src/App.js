@@ -36,6 +36,7 @@ function App() {
           element={
             <ApartmentDetails
               apartmentArrFromApi={apartmentArrFromApi}
+              setApartmentArrFromApi={setApartmentArrFromApi}
               devAPI={devAPI}
             />
           }

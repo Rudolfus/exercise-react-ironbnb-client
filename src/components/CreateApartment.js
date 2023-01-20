@@ -16,15 +16,13 @@ const CreateApartment = () => {
     e.preventDefault();
     // Create the body for the POST request
     const body = { title: title, pricePerDay: price, img: image };
-    axios
-      .post(process.env.REACT_APP_API_URL + "/apartments", body)
-      .then((response) => {
-        // Reset the state
-        setTitle("");
-        setPrice(1);
-        setImage("");
-        navigate("/apartments");
-      });
+    axios.post(process.env.REACT_APP_API_URL + "/apartments", body).then(() => {
+      // Reset the state
+      setTitle("");
+      setPrice(1);
+      setImage("");
+      navigate("/apartments");
+    });
   };
 
   return (
