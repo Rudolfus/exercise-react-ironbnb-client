@@ -9,7 +9,9 @@ import ApartmentDetails from "./components/ApartmentDetails";
 import CreateApartment from "./components/CreateApartment";
 
 function App() {
-  const [apartmentArrFromApi, setApartmentArrFromApi] = useState(null);
+  const [apartmentArrFromApi, setApartmentArrFromApi] = useState();
+
+  const devAPI = process.env.REACT_APP_API_URL;
 
   return (
     <div className="App">
@@ -23,14 +25,22 @@ function App() {
             <ApartmentsList
               apartmentArrFromApi={apartmentArrFromApi}
               setApartmentArrFromApi={setApartmentArrFromApi}
+              devAPI={devAPI}
             />
           }
         />
         {/* this line must be above ":apartmentId", otherwise "create" will be passed as a params */}
         <Route path="/apartments/create" element={<CreateApartment />} />
-        <Route path="/apartments/:apartmentId" element={<ApartmentDetails />} />
+        <Route
+          path="/apartments/:apartmentId"
+          element={
+            <ApartmentDetails
+              apartmentArrFromApi={apartmentArrFromApi}
+              devAPI={devAPI}
+            />
+          }
+        />
       </Routes>
-      <h1>Welcome</h1>
     </div>
   );
 }

@@ -1,14 +1,20 @@
+import "../App.css";
 import { useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const ApartmentsList = ({ apartmentArrFromApi, setApartmentArrFromApi }) => {
+const ApartmentsList = ({
+  apartmentArrFromApi,
+  setApartmentArrFromApi,
+  devAPI,
+}) => {
   useEffect(() => {
     getApartmentArrFromApi();
   }, []);
 
   const getApartmentArrFromApi = () => {
     axios
-      .get(process.env.REACT_APP_API_URL + "/apartments")
+      .get(devAPI + "/apartments")
       .then((response) => {
         console.log(response.data);
 
@@ -31,7 +37,9 @@ const ApartmentsList = ({ apartmentArrFromApi, setApartmentArrFromApi }) => {
                 <img src={apartmentDetails.img} alt="an apartment" />
                 <h2>Title: {apartmentDetails.title}</h2>
                 <p>Price per Day: {apartmentDetails.pricePerDay}</p>
-                {/* <Link to={"/apartments/" + apartmentDetails.id}>More Details</Link> */}
+                <Link to={"/apartments/" + apartmentDetails.id}>
+                  More Details
+                </Link>
               </div>
             );
           })}
