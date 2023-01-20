@@ -1,7 +1,11 @@
+import { Link, NavLink } from "react-router-dom";
+
 const NavBar = () => {
   return (
     <div>
-      <h1> NavBar </h1>
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/apartments">Apartments</NavLink>
+      <NavLink to="/apartments/create">Create</NavLink>
     </div>
   );
 };
